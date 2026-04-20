@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>工业设备智能监测平台</title>
+    <script src="https://unpkg.com/echarts@5.4.3/dist/echarts.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<script>
+    // 动态获取后端API地址，如果当前是 file:// 则回退到 localhost:5000
+    let API_BASE;
+    if (window.location.protocol === 'file:') {
+        API_BASE = 'http://localhost:5000/api';
+    } else {
+        API_BASE = window.location.protocol + '//' + window.location.hostname + ':5000/api';
+    }
+</script>
+
+
+<body>
+    <script>
+        (function () {
+            const currentUser = sessionStorage.getItem('currentUser');
+            if (!currentUser) {
+                window.location.replace('./main-page/main-page.html');
+            }
+        })();
+    </script>
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- 右侧主内容 -->
+    <div class="main">
+        <header class="app-header">
+            <div class="logo">
+                <img src="./photo/logo1.png" alt="logo">
+                <h1>时序先知</h1>
+            </div>
+            <div class="main-wrapper">
+                <div class="menu">
+                    <div class="menu-divider"></div>
+                    <div class="menu-item active" data-page="home">
+                        <img src="./photo/home.png" alt="Home">
+                        <span>系统首页</span>
+                    </div>
+                    <div class="menu-divider"></div>
+                    <div class="menu-item" data-page="data">
+                        <img src="./photo/data.png" alt="Data Analysis">
+                        <span>数据分析</span>
+                    </div>
+                    <div class="menu-divider"></div>
+                    <div class="menu-item" data-page="device">
+                        <img src="./photo/device.png" alt="Device List">
+                        <span>设备列表</span>
+                    </div>
+                    <div class="menu-divider"></div>
+                    <div class="menu-item" data-page="setting">
+                        <img src="./photo/setting.png" alt="Settings">
+                        <span>设置</span>
+                    </div>
+                    <div class="menu-divider"></div>
+                </div>
+                <div class="current-date"></div>
+            </div>
+
+
+            <div class="user">
+                <div class="user-info">
+                    <h3>Admin</h3>
+                </div>
+                <div class="user-img">
+                    <img src="./photo/admin.png" alt="admin">
+                </div>
+
+            </div>
+        </header>
+        <div class="page active" id="home">
+            <div class="homepage-box1">
+                <div class="home-box1">
+                    <div class="bg">
+                        <div class="box1-head">
+                            <h3>设备健康状态</h3>
+                            <p>查看全部</p>
+                        </div>
+
+                        <div class="box1-1">
+                            <ul>
+                                <li data-device="device1"></li>
+                                <li data-device="device2"></li>
+                                <li data-device="device3"></li>
+                                <li data-device="device4"></li>
+                                <li data-device="device5"></li>
+                                <li data-device="device6"></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="home-box2">
+                    <div class="bg">
+                        <h3>异常检测</h3>
+                        <div class="box2">
+                            <div class="box2-left">
+
+                                <div class="box2-1">
+                                    <div id="chart1"></div>
+                                </div>
+                                <div class="box2-3">
+                                    <p>⚙️Number of Anomalies</p>
+                                    <h4>%</h4>
+                                </div>
+                            </div>
+
+                            <div class="box2-2">
+                                <ul id="anomalyDeviceList">
+                                    <li data-device-id="1">
+                                        <div class="anomaly_info_img"><img src="./photo/anomaly_info.png" alt=""></div>
+                                        <div class="anomaly_device">
+                                            <h4 class="device-name">Motor #1</h4>
+                                            <p>Predicted: 油温过低</p>
+                                        </div>
+                                        <div class="anomaly_score">
+                                            <h3>9.87%</h3>
+                                        </div>
+                                    </li>
+                                    <li data-device-id="2">
+                                        <div class="anomaly_info_img"><img src="./photo/anomaly_info.png" alt=""></div>
+                                        <div class="anomaly_device">
+                                            <h4 class="device-name">Motor #2</h4>
+                                            <p>Predicted: 油温过低</p>
+                                        </div>
+                                        <div class="anomaly_score">
+                                            <h3>9.94%</h3>
+                                        </div>
+                                    </li>
+                                    <li data-device-id="3">
+                                        <div class="anomaly_info_img"><img src="./photo/anomaly_info.png" alt=""></div>
+                                        <div class="anomaly_device">
+                                            <h4 class="device-name">Motor #3</h4>
+                                            <p>Predicted: 系统过程故障</p>
+                                        </div>
+                                        <div class="anomaly_score">
+                                            <h3>12.14%</h3>
+                                        </div>
+                                    </li>
+                                    <li data-device-id="4">
+                                        <div class="anomaly_info_img"><img src="./photo/anomaly_info.png" alt=""></div>
+                                        <div class="anomaly_device">
+                                            <h4 class="device-name">Motor #4</h4>
+                                            <p>Predicted: 系统故障</p>
+                                        </div>
+                                        <div class="anomaly_score">
+                                            <h3>8.60%</h3>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="home-box3">
+                <div class="bg">
+                    <h3>系统性能指标 & 生成与真实数据分布</h3>
+                    <div class="box3">
+                        <div class="box3-1">
+                            <ul>
+                                <li>
+                                    <div class="li-box">
+                                        <img src="./photo/1-1.png" alt="">
+                                        <p>相关性得分</p>
+                                    </div>
+                                    <h4 id="correlation_score">0</h4>
+                                </li>
+                                <li>
+                                    <div class="li-box">
+                                        <img src="./photo/1-2.png" alt="">
+                                        <p>预测得分</p>
+                                    </div>
+                                    <h4 id="prediction_score">0</h4>
+                                </li>
+                                <li>
+                                    <div class="li-box">
+                                        <img src="./photo/1-3.png" alt="">
+                                        <p>多元化得分</p>
+                                    </div>
+                                    <h4 id="multits_score">0</h4>
+                                </li>
+                                <li>
+                                    <div class="li-box">
+                                        <img src="./photo/1-4.png" alt="">
+                                        <p>生成序列数</p>
+                                    </div>
+                                    <h4 id="generated_sequences">0</h4>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="box4-1 pca-container">
+                            <div class="pca-header">
+                                <h3>真实与生成数据分布 (PCA)</h3>
+                                <div class="pca-device-select-wrap">
+                                    <button id="pcaDeviceBtn" class="pca-device-expand-btn">选择设备 ▼</button>
+                                    <ul id="pcaDeviceList" class="pca-device-list"></ul>
+                                </div>
+                            </div>
+                            <div id="pcaChart" class="pca-chart-container"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <!-- 数据分析 -->
+        <div class="page" id="data">
+            <div class="data_box1">
+                <div class="health_trend">
+                    <div class="health_trend1">
+                        <h3>健康趋势</h3>
+                        <div class="health-trend-header">
+                            <div class="device-select-wrap">
+                                <button class="device-expand-btn">选择设备 ▼</button>
+                                <ul class="device-list">
+                                    <li data-device="device1" class="active">设备1</li>
+                                    <li data-device="device2">设备2</li>
+                                    <li data-device="device3">设备3</li>
+                                    <li data-device="device4">设备4</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="healthTrendChart" class="echarts-chart"></div>
+                </div>
+                <div class="anomaly_trend">
+                    <h3>异常趋势</h3>
+                    <ul></ul>
+                </div>
+                <div class="model_performance">
+                    <h3>模型评价</h3>
+                    <div class="model-container">
+                        <div class="model-left">
+                            <ul>
+                                <li>
+                                    <p>数据预测评估</p>
+                                    <h4 id="predictionScore">0.000</h4>
+                                </li>
+                                <li>
+                                    <p>补全数据评估</p>
+                                    <h4 id="imputationScore">0.000</h4>
+                                </li>
+                                <li>
+                                    <p>异常检测评估</p>
+                                    <h4 id="anomalyScore">0.000</h4>
+                                </li>
+                                <li>
+                                    <p>不同设备间的关联性</p>
+                                    <h4 id="correlationScore">0.000</h4>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="data_box2">
+                <div class="device_comp">
+                    <div class="health-trend-header">
+                        <h3>设备特性对比</h3>
+                        <div class="device-select-wrap">
+                            <button class="device-expand-btn" id="compBtn">选择设备 ▼</button>
+                            <ul class="device-list-comparison" id="compList">
+                                <li class="active"></li>
+                                <li">
+                                    </li>
+                                    <li></li>
+                                    <li></li>
+                                    <li></li>
+                                    <li></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div style="display: flex; padding: 0 20px; height: calc(100% - 70px); align-items: center;">
+                        <div id="deviceRadarChart" style="width: 60%; height: 90%;"></div>
+                        <div id="deviceDetailPanel">
+                            <h4 id="detailDeviceName">Motor #1</h4>
+                            <div class="detail-grid">
+                                <div class="grid-item">
+                                    <p class="label">健康得分</p>
+                                    <p class="value" id="detailHealthScore">89 <span>/ 100</span></p>
+                                </div>
+                                <div class="grid-item">
+                                    <p class="label">异常频次</p>
+                                    <p class="value" id="detailAnomalyCount">5 <span>次/月</span></p>
+                                </div>
+                                <div class="grid-item">
+                                    <p class="label">预测准确性</p>
+                                    <p class="value" id="detailPredictAcc">92 <span>%</span></p>
+                                </div>
+                                <div class="grid-item">
+                                    <p class="label">反应时间</p>
+                                    <p class="value" id="detailResponseTime">0.3 <span>s</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mul_analysis">
+                    <div class="health-trend-header">
+                        <h3>多设备-多传感器相关性分析</h3>
+                    </div>
+                    <div id="corrHeatmap" style="width: 95%; height: 85%; margin: 15px auto;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="page" id="device">
+            <div
+                style="margin-bottom: 20px; display: flex; gap: 10px; align-items: center; padding: 0 20px;margin-top: 30px;">
+                <input type="text" id="deviceSearchInput" placeholder="输入设备名称或编号进行搜索..."
+                    style="flex: 1; padding: 8px 12px; border: 1px solid #3c4b6e; border-radius: 6px; background: rgba(30,35,50,0.7); color: #fff; font-size: 14px; outline: none;">
+                <button onclick="deviceList.search()" class="device-search-btn">搜索</button>
+                <button onclick="deviceList.resetSearch()" class="device-reset-btn">重置</button>
+            </div>
+
+            <div style="overflow-x: auto; padding: 0 20px;">
+                <table class="device-table">
+                    <thead>
+                        <tr>
+                            <th>设备名称</th>
+                            <th>设备编号</th>
+                            <th>设备状态</th>
+                            <th>健康得分</th>
+                            <th>最后异常时间</th>
+                            <th>历史故障记录</th>
+                            <th>最新维护日期</th>
+                            <th>预测维护时间</th>
+                            <th>异常次数</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="deviceTableBody"></tbody>
+                </table>
+            </div>
+        </div>
+
+
+        <!-- 设备编辑页面 -->
+        <div class="page" id="editPage">
+            <div
+                style="max-width: 800px; margin: 30px auto; background: rgba(30,40,60,0.9); border-radius: 20px; padding: 25px; backdrop-filter: blur(4px); border: 1px solid #5be6ff;">
+                <h2 style="color: #5be6ff; margin-bottom: 20px;">编辑设备 & 维护记录</h2>
+                <div style="background: rgba(0,0,0,0.3); border-radius: 12px; padding: 20px; margin-bottom: 25px;">
+                    <h3 style="color: #fff; margin-bottom: 15px;">基本信息</h3>
+                    <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                        <div style="flex:1">
+                            <label style="color:#ccc;">设备名称</label>
+                            <input type="text" id="editDeviceName" class="edit-input" placeholder="设备名称">
+                        </div>
+                        <div style="flex:1">
+                            <label style="color:#ccc;">设备编号</label>
+                            <input type="text" id="editDeviceId" class="edit-input" placeholder="设备编号">
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background: rgba(0,0,0,0.3); border-radius: 12px; padding: 20px;">
+                    <h3 style="color: #fff; margin-bottom: 15px;">📋 维护记录</h3>
+                    <div id="maintenanceList" style="margin-bottom: 20px; max-height: 250px; overflow-y: auto;"></div>
+                    <div style="border-top: 1px solid #3c4b6e; padding-top: 20px; margin-top: 10px;">
+                        <h4 style="color: #5be6ff; margin-bottom: 12px;">添加新维护记录</h4>
+                        <div
+                            style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 10px; margin-bottom: 15px;">
+                            <input type="date" id="newMaintDate" class="edit-input" placeholder="日期">
+                            <input type="text" id="newMaintType" class="edit-input" placeholder="类型 (如定期维护)">
+                            <input type="text" id="newMaintContent" class="edit-input" placeholder="内容">
+                            <input type="text" id="newMaintPerson" class="edit-input" placeholder="人员">
+                        </div>
+                        <div style="display: flex; gap: 10px; align-items: center;">
+                            <input type="text" id="newMaintResult" class="edit-input" style="flex:2" placeholder="结果">
+                            <button onclick="deviceList.addMaintenanceRecord()" class="save-btn"
+                                style="width: auto; padding: 8px 24px;">+ 添加记录</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 15px; justify-content: flex-end; margin-top: 30px;">
+                    <button onclick="deviceList.saveEdit()" class="save-btn"
+                        style="width: auto; padding: 10px 28px;">保存修改</button>
+                    <button onclick="deviceList.backToDeviceList()" class="save-btn"
+                        style="background: #4b5563; width: auto;">返回设备列表</button>
+                </div>
+            </div>
+        </div>
+        <div class="page" id="setting">
+            <div class="set">
+                <ul class="set-ul">
+                    <li class="set-box1">
+                        <div class="setting-box">
+                            <h2>账户</h2>
+                            <form id="accountForm">
+                                <ul>
+                                    <li class="form-item">
+                                        <label>用户名:</label>
+                                        <input type="text" id="username" value="Admin" placeholder="请输入用户名">
+                                    </li>
+                                    <li class="form-item">
+                                        <label>头像：</label>
+                                        <div class="avatar-group">
+                                            <img id="avatarPreview" src="./photo/admin.png" alt="头像预览"
+                                                class="avatar-preview" style="width: 40px;
+                                            height: 40px;">
+                                            <input type="file" id="avatarUpload"
+                                                accept="image/png,image/jpg,image/jpeg">
+                                        </div>
+                                    </li>
+                                    <li class=" form-item">
+                                        <label>邮箱：</label>
+                                        <input type="email" id="email" value="admin@example.com" placeholder="请输入邮箱">
+                                    </li>
+                                    <li class="form-item">
+                                        <label>密码：</label>
+                                        <input type="password" id="password" placeholder="请输入新密码（至少6位）">
+                                        <span class="tip">留空则不修改密码</span>
+                                    </li>
+                                </ul>
+                                <button type="submit" class="save-btn">保存修改</button>
+                            </form>
+                        </div>
+                    </li>
+                    <li class="set-box2">
+                        <div class="setting-box">
+                            <h2>通知</h2>
+                            <ul>
+                                <li class="form-item">
+                                    <label>异常通知</label>
+                                    <div style="display: flex; align-items: center; flex: 1;justify-content: right;">
+                                        <label class="switch">
+                                            <input type="checkbox" id="exceptionNotifySwitch" checked>
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </div>
+                                </li>
+                                <li class="form-item">
+                                    <label>通知方式</label>
+                                    <div style="display: flex; gap: 20px; flex: 1;justify-content: right;">
+                                        <label style="display: flex; align-items: center; width: auto; gap: 8px;">
+                                            <input type="radio" name="notifyType" value="sms" checked> 短信
+                                        </label>
+                                        <label style="display: flex; align-items: center; width: auto; gap: 8px;">
+                                            <input type="radio" name="notifyType" value="email"> 邮箱
+                                        </label>
+                                    </div>
+                                </li>
+                                <li class="form-item">
+                                    <label>系统更新</label>
+                                    <div>
+                                        <button type="button" id="checkUpdateBtn" class="save-btn">检查更新</button>
+                                    </div>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </li>
+                    <li class="set-box3">
+                        <div class="setting-box">
+                            <h2>角色 & 权限</h2>
+                            <ul>
+                                <li class="role" style="margin-top: 30px;">
+                                    <div class="sb-img">
+                                        <img src="./photo/adminstrator.png" alt="">
+                                    </div>
+                                    <div class="sb">
+
+                                        <h4>系统管理员</h4>
+                                        <p>可以访问和修改所有系统设置、设备和数据</p>
+                                    </div>
+                                </li>
+                                <li class="role">
+                                    <img src="./photo/engineer.png" alt="">
+                                    <div class="sb">
+
+                                        <h4>设备工程师</h4>
+                                        <p>可以查看设备数据、进行设备维护，但无法更改系统设置</p>
+                                    </div>
+                                </li>
+                                <li class="role">
+                                    <img src="./photo/data-analyst.png" alt="">
+                                    <div class="sb">
+
+                                        <h4>数据分析员</h4>
+                                        <p>可以查看数据分析和趋势图，但无法操作设备或系统设置</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="set-box4 user-module-wrapper">
+                        <div class="setting-box">
+                            <h2>用户</h2>
+                            <div class="user-module-content">
+                                <!-- 添加用户按钮 -->
+                                <button type="button" id="addUserBtn" class="save-btn"
+                                    style="width: 200px;">添加用户</button>
+                                <!-- 用户列表展示区域 -->
+                                <div class="user-list" style="margin: 30px 0; color: #fff;">
+                                    <table class="user-table">
+                                        <thead>
+                                            <tr>
+                                                <th>用户名</th>
+                                                <th>角色</th>
+                                                <th>邮箱</th>
+                                                <th>操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="userTableBody">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="modal-overlay" id="userModal">
+                <div class="modal" style="width: 450px;">
+                    <span class="modal-close" id="userModalClose">&times;</span>
+                    <h3 class="modal-title" id="userModalTitle">添加用户</h3>
+                    <form id="userForm">
+                        <input type="hidden" id="editUserId"> <!-- 编辑用户时存储用户ID -->
+                        <div style="margin: 15px 0;">
+                            <label
+                                style="display: block; color: #333; margin-bottom: 8px; font-weight: 600;">用户名：</label>
+                            <input type="text" id="newUsername" placeholder="请输入用户名"
+                                style="width: 100%; height: 38px; padding: 0 10px; border: 1px solid #eee; border-radius: 4px; outline: none;">
+                        </div>
+                        <div style="margin: 15px 0;">
+                            <label
+                                style="display: block; color: #333; margin-bottom: 8px; font-weight: 600;">角色：</label>
+                            <div style="display: flex; gap: 20px;">
+                                <label><input type="radio" name="userRole" value="管理员" checked> 管理员</label>
+                                <label><input type="radio" name="userRole" value="设备工程师"> 设备工程师</label>
+                                <label><input type="radio" name="userRole" value="数据分析员"> 数据分析员</label>
+                            </div>
+                        </div>
+                        <div style="margin: 15px 0;">
+                            <label
+                                style="display: block; color: #333; margin-bottom: 8px; font-weight: 600;">邮箱：</label>
+                            <input type="email" id="newEmail" placeholder="请输入邮箱"
+                                style="width: 100%; height: 38px; padding: 0 10px; border: 1px solid #eee; border-radius: 4px; outline: none;">
+                        </div>
+                        <div style="margin: 15px 0;">
+                            <label
+                                style="display: block; color: #333; margin-bottom: 8px; font-weight: 600;">密码：</label>
+                            <input type="password" id="newPassword" placeholder="请输入密码" required
+                                style="width: 100%; height: 38px; padding: 0 10px; border: 1px solid #eee; border-radius: 4px; outline: none;">
+                        </div>
+                        <button type="submit"
+                            style="width: 100%; height: 40px; background: #4096ff; color: #fff; border: none; border-radius: 4px; font-size: 16px; cursor: pointer;">确认</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- 设备详情弹窗 -->
+    <div class="modal-overlay" id="deviceModal">
+        <div class="modal" style="width: 650px;">
+            <span class="modal-close">&times;</span>
+            <h3 class="modal-title" id="modalTitle"></h3>
+            <div style="margin-top: 20px;">
+                <h4 style="color: #333; margin-bottom: 12px;">实时数据监控</h4>
+                <div style="display: flex; gap: 8px; margin-bottom: 10px;">
+                    <button class="time-btn active" data-hour="6">6小时内</button>
+                    <button class="time-btn" data-hour="12">12小时内</button>
+                    <button class="time-btn" data-hour="24">24小时内</button>
+                </div>
+                <div id="deviceChart" style="width: 100%; height: 250px;"></div>
+            </div>
+
+            <!-- 新增：设备详细信息区域 -->
+            <div id="deviceDetailInfo" style="margin-top: 20px; border-top: 1px solid #eee; padding-top: 15px;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+                    <div><strong>设备编号：</strong> <span id="detailDeviceId"></span></div>
+
+                </div>
+
+                <div style="margin-bottom: 15px;">
+                    <strong>历史故障记录</strong>
+                    <table id="faultTable" style="width: 100%; border-collapse: collapse; margin-top: 8px;">
+                        <thead>
+                            <tr style="background: #f5f5f5;">
+                                <th style="padding: 6px; border: 1px solid #ddd;">故障类型</th>
+                                <th style="padding: 6px; border: 1px solid #ddd;">发生时间</th>
+                                <th style="padding: 6px; border: 1px solid #ddd;">处理措施</th>
+                            </tr>
+                        </thead>
+                        <tbody id="faultTableBody">
+                            <tr>
+                                <td colspan="3" style="text-align:center;">暂无故障记录</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div style="margin-bottom: 15px;">
+                    <strong>恢复情况：</strong> <span id="recoveryStatus"></span>
+                </div>
+                <div>
+                    <strong>设备维护建议：</strong> <span id="maintenanceAdvice"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const chartContainers = document.querySelectorAll('[id*="chart"], [class*="chart"], [id*="echart"], [id*="graph"]');
+
+            const observer = new ResizeObserver(entries => {
+                for (let entry of entries) {
+                    const el = entry.target;
+                    if (el.__echart_instance__) {
+                        setTimeout(() => {
+                            el.__echart_instance__.resize();
+                        }, 50);
+                    }
+                }
+            });
+
+            const _ec = echarts.init;
+            echarts.init = function (...args) {
+                const chart = _ec.apply(echarts, args);
+                if (args[0]) {
+                    args[0].__echart_instance__ = chart;
+                    observer.observe(args[0]);
+                }
+                return chart;
+            };
+        });
+    </script>
+    <script src="script.js"></script>
+    <script src="./echarts/distribution.js"></script>
+    <script src="./echarts/total_count.js"></script>
+    <script src="./data_file/performance.js"></script>
+    <script src="./echarts/device_info.js"></script>
+    <script src="./echarts/health_trend.js"></script>
+    <script src="./echarts/device_compa.js"></script>
+    <script src="./echarts/model_gauge.js"></script>
+    <script src="./echarts/mul_analysis.js"></script>
+    <script src="./echarts/anomaly_trend.js"></script>
+    <script src="./echarts/device_list.js"></script>
+    <script>
+
+    </script>
+</body>
+
+</html>

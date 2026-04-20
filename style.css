@@ -1,0 +1,2350 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Microsoft YaHei", sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+}
+
+.main {
+    zoom: 0.8;
+    height: 125%;
+    overflow-y: auto;
+}
+
+.main {
+    overflow-y: auto;
+    min-height: 100vh;
+}
+
+.app-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 85px;
+    padding: 0 24px;
+    background: #3476a5;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    flex-shrink: 0;
+    position: relative;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    overflow: hidden;
+    margin-left: 30px;
+}
+
+.logo h1 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex-shrink: 0;
+    font-size: 30px;
+    margin-left: 10px;
+    color: #88c7f1;
+}
+
+.logo img {
+    width: 60px;
+    height: 60px;
+    margin-right: 8px;
+}
+
+
+.menu {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.menu-divider {
+    width: 1px;
+    height: 35px;
+    background: rgba(255, 255, 255, 0.15);
+    margin: 0 4px;
+}
+
+.app-header .main-wrapper {
+    width: 60%;
+    background: none;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.menu-item img {
+    width: 26px;
+    height: 26px;
+    margin-right: 12px;
+}
+
+.menu-item {
+    width: 150px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: all 0.2s;
+    cursor: pointer;
+    color: #e0e0e0;
+    white-space: nowrap;
+}
+
+.menu-item:hover {
+    background: #30648f;
+}
+
+.menu-item.active {
+    background: #242d47;
+    color: #fff;
+    border-left: none;
+}
+
+.current-date {
+    font-size: 18px;
+    color: #dadada;
+    white-space: nowrap;
+    margin-right: 30px;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: rgba(46, 61, 90, 0.2);
+    padding: 6px 25px;
+    border-radius: 10px;
+    margin-right: 20px;
+}
+
+.user-info {
+    font-size: 18px;
+    color: #eaeaea;
+}
+
+.user-img {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 1px solid #2d3754;
+}
+
+.user-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+
+li {
+    list-style: none;
+}
+
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(125deg, #20b6e4);
+
+    background-size: 400%;
+    animation: bgAnimation 15s linear infinite;
+    z-index: -2;
+    pointer-events: none;
+}
+
+@keyframes bgAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+
+}
+
+.main {
+    position: relative;
+    flex: 1;
+    overflow-y: auto;
+    background: transparent !important;
+    animation: none;
+    z-index: 1;
+}
+
+
+
+#particle-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+}
+
+
+
+
+.page {
+    display: none;
+    position: relative;
+    z-index: 2;
+}
+
+.page.active {
+    display: block;
+}
+
+.page h2 {
+    font-size: 26px;
+    color: #ffffff;
+}
+
+.bg {
+    background: rgba(27, 37, 59, 0.35);
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 15px;
+    align-items: center;
+}
+
+.page h3 {
+    font-size: 28px;
+    color: #ebe2e2;
+    margin-top: 10px;
+    margin-left: 18px;
+}
+
+.homepage-box1 {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.home-box1 {
+    width: 43%;
+}
+
+.home-box1 .bg {
+    height: 500px;
+}
+
+.home-box1 .box1-head {
+    display: flex;
+    justify-content: space-between;
+}
+
+.home-box1 .box1-head p {
+    color: #e7e7e7;
+    margin-top: 20px;
+    margin-right: 25px;
+    cursor: pointer;
+    border-bottom: 1px solid #fff;
+}
+
+
+.home-box1 .box1-1 ul {
+    width: 98%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-left: 7px;
+}
+
+.home-box1 .box1-1 li {
+    width: 49%;
+    height: 120px;
+    box-shadow: 0 2px 10px rgba(23, 28, 32, 0.5);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.4);
+    text-align: center;
+    margin-top: 15px;
+    color: #555;
+    font-size: 18px;
+    display: flex;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.home-box1 .box1-1 li:hover {
+    transform: translateY(-4px) scale(1.04);
+}
+
+.home-box1 .box1-1 li .device_img {
+    width: 20%;
+    height: auto;
+    margin-top: 15px;
+}
+
+.home-box1 .box1-1 li .device_img img {
+    width: 52px;
+    height: auto;
+}
+
+.home-box1 .box1-1 li .device_health {
+    width: 80%;
+    height: 120px;
+}
+
+.home-box1 .box1-1 li .device_health .name {
+    height: 48px;
+    position: relative;
+    display: flex;
+    margin-top: 5px;
+    align-items: center;
+}
+
+.home-box1 .box1-1 li .device_health .name h4 {
+    width: 65%;
+    height: 48px;
+    font-size: 20px;
+    color: #2b2b2b;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.home-box1 .box1-1 li .device_health .name h2 {
+    font-size: 26px;
+    margin-left: 10px;
+}
+
+.home-box1 .box1-1 li .device_health .name p {
+    color: #1e6b14;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+
+
+.home-box1 .box1-1 li .device_health .judge-1 {
+    display: flex;
+    width: 90%;
+    height: 30px;
+    margin-left: 10px;
+}
+
+.home-box1 .box1-1 li .device_health .judge-1 h5 {
+    width: 40%;
+    font-size: 80%;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.home-box1 .box1-1 li .device_health .judge {
+    display: flex;
+    width: 55%;
+    height: 20px;
+    background-color: #c0c0c0;
+    align-items: center;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+.home-box1 .box1-1 li .device_health .judge img {
+    width: 15px;
+    height: 15px;
+    margin-left: 8px;
+}
+
+.home-box1 .box1-1 li .device_health .judge p {
+    margin-left: 10px;
+    font-weight: 600;
+}
+
+.score {
+    width: 90%;
+    height: 10px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
+    overflow: hidden;
+    margin: 6px 0;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.health-bar {
+    height: 100%;
+    width: 95%;
+    background: #1e6b14;
+    border-radius: 5px;
+    transition: width 0.4s ease, background 0.3s ease;
+}
+
+.health-bar.orange {
+    background: #c9861b;
+}
+
+.health-bar.red {
+    background: #ca3727;
+}
+
+.name h2,
+.name p {
+    transition: color 0.3s ease;
+    color: #1e6b14;
+}
+
+.name .orange {
+    color: #b16f06 !important;
+}
+
+.name .red {
+    color: #ca3727 !important;
+}
+
+.judge p {
+    transition: color 0.3s ease;
+    color: #1e6b14;
+    margin: 0;
+}
+
+.judge p.orange {
+    color: #c9861b;
+}
+
+.judge p.red {
+    color: #ca3727;
+}
+
+
+
+.home-box2 {
+    width: 50%;
+    border-radius: 20px;
+    margin-left: 2%;
+}
+
+.home-box2 .bg {
+    height: 500px;
+}
+
+.home-box2 h3 {
+    font-size: 28px;
+    color: #f3f3f3;
+}
+
+
+#chart1 {
+    width: 100%;
+    height: 340px;
+}
+
+
+.home-box2 .box2 {
+    display: flex;
+    margin-top: 15px;
+
+}
+
+.home-box2 .box2-left {
+    background: rgba(37, 48, 75, 0.6);
+    border-radius: 20px;
+    width: 51%;
+}
+
+
+.home-box2 .box2-3 {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    margin-top: 5px;
+}
+
+.home-box2 .box2-3 p {
+    width: 70%;
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    color: #c7c7c7;
+    font-size: 16px;
+}
+
+.home-box2 .box2-3 h4 {
+    color: #ffe3e3;
+    font-size: 24px;
+    padding-left: 5%;
+    margin-top: 10px;
+    margin-right: 3%;
+    margin-bottom: 5px;
+    border-left: 3px solid #434b55;
+}
+
+
+.home-box2 .box2-2 {
+    width: 50%;
+}
+
+
+.home-box2 .box2-2 ul {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 20px;
+}
+
+.home-box2 .box2-2 li {
+    width: 98%;
+    height: 94px;
+    background: rgba(40, 49, 70, 0.3);
+    margin-bottom: 0px;
+    border-radius: 20px;
+    display: flex;
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+}
+
+.home-box2 .box2-2 li:hover {
+    transform: translateY(-4px);
+    background: rgba(40, 49, 70, 0.5);
+}
+
+.home-box2 .box2-2 li .anomaly_info_img {
+    width: 60px;
+    margin-left: 20px;
+    margin-top: 25px;
+}
+
+.home-box2 .box2-2 li .anomaly_device {
+    width: 60%;
+    margin-top: 10px;
+}
+
+.home-box2 .box2-2 li .anomaly_device h4 {
+    height: 54px;
+    color: #f5cece;
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+}
+
+.home-box2 .box2-2 li .anomaly_device p {
+    color: #ece3e3;
+    font-size: 15px;
+    margin-top: 4.5px;
+}
+
+.home-box2 .box2-2 li .anomaly_score h3 {
+    margin-top: 25px;
+    font-size: 26px;
+    color: #fff;
+    margin-left: 0;
+}
+
+.home-box2 .box2-2 li:last-child {
+    margin-bottom: 0;
+}
+
+
+
+
+.home-box3 {
+    width: 95%;
+    margin-top: 80px;
+    margin: 0 auto;
+}
+
+.home-box3 .bg {
+    height: 500px;
+    margin-bottom: 40px;
+}
+
+
+.home-box3 .box3 {
+    display: flex;
+    margin-top: 10px;
+    height: 390px;
+}
+
+.home-box3 .box3-1 {
+    width: 35%;
+    height: 400px;
+}
+
+.home-box3 .box3-1 ul {
+    display: flex;
+    flex-wrap: wrap;
+    height: 400px;
+    align-items: center;
+    justify-content: center;
+}
+
+.home-box3 .box3-1 li {
+    width: 46%;
+    height: 46%;
+    background: rgba(59, 78, 97, 0.6);
+    margin-top: 10px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.home-box3 .box3-1 li:hover {
+    background-color: #addbdf;
+    transform: translateY(-6px) scale(1.05);
+}
+
+.home-box3 .box3-1 li:hover p {
+    color: #21263d;
+}
+
+.home-box3 .box3-1 li:hover h4 {
+    color: #271f1f;
+}
+
+.home-box3 .box3-1 li:nth-child(2n) {
+    margin-left: 15px;
+}
+
+
+
+.home-box3 .box3-1 li img {
+    width: 58px;
+    height: auto;
+    margin-left: 20px;
+    margin-top: 10px;
+}
+
+.home-box3 .box3-1 li p {
+    font-size: 24px;
+    color: #d8d8d8;
+    margin-top: 5px;
+    text-align: center;
+}
+
+.home-box3 .box3-1 li h4 {
+    font-size: 34px;
+    margin-top: 15px;
+    text-align: center;
+    color: #ffe9e9;
+}
+
+.home-box3 .box3-2 {
+    margin-top: 10px;
+    width: 350px;
+    height: 190px;
+    margin-left: 20px;
+    background-color: #222531;
+    border-radius: 20px;
+}
+
+
+.box4-1 {
+    width: 64%;
+    height: 390px;
+    margin-top: 10px;
+    background: rgba(45, 58, 82, 0.733);
+    border-radius: 15px;
+    margin-left: 10px;
+}
+
+.pca-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.pca-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+    margin-bottom: 10px;
+    flex-shrink: 0;
+}
+
+.pca-header h3 {
+    color: #fff;
+    margin: 0;
+    font-size: 18px;
+}
+
+.pca-chart-container {
+    width: 100%;
+    flex: 1;
+    min-height: 0;
+}
+
+.pca-device-select-wrap {
+    position: relative;
+    z-index: 20;
+}
+
+.pca-device-expand-btn {
+    padding: 7px 14px;
+    background: #1e1e2e;
+    color: #fff;
+    border: 1px solid #5865f2;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+
+.pca-device-expand-btn:hover {
+    background: #5865f2;
+    transform: scale(1.03);
+}
+
+.pca-device-list {
+    position: absolute;
+    right: 0;
+    top: 38px;
+    background: #1e1e2e;
+    border: 1px solid #3c3c5c;
+    border-radius: 6px;
+    padding: 6px 0;
+    z-index: 100;
+    min-width: 130px;
+    display: none;
+    list-style: none;
+    margin: 0;
+}
+
+.pca-device-list li {
+    padding: 7px 14px;
+    cursor: pointer;
+    color: #e0e0e0;
+    transition: background 0.2s;
+}
+
+.pca-device-list li:hover,
+.pca-device-list li.active {
+    background: #5865f2;
+    color: #fff;
+}
+
+
+
+
+/* 弹窗遮罩层 */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+
+/* 弹窗容器 */
+.modal {
+    width: 500px;
+    background: #fff;
+    border-radius: 8px;
+    padding: 24px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    position: relative;
+}
+
+/* 弹窗关闭按钮 */
+.modal-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    font-size: 20px;
+    cursor: pointer;
+    color: #666;
+    transition: color 0.2s;
+}
+
+.modal-close:hover {
+    color: #ff4444;
+}
+
+/* 弹窗标题 */
+.modal-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #eee;
+}
+
+/* 弹窗内容 */
+.modal-content {
+    color: #555;
+    line-height: 1.6;
+}
+
+
+
+
+
+.data_box1 {
+    display: flex;
+    width: 96%;
+    justify-content: center;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+.data_box1 .health_trend {
+    width: 40% !important;
+    background-color: #283b4dec;
+    border-radius: 20px;
+    border: 5px solid #5be6ff;
+}
+
+/* 健康趋势模块样式 */
+.health_trend {
+    position: relative;
+    box-sizing: border-box;
+}
+
+.health_trend1 {
+    display: flex;
+    justify-content: space-between;
+}
+
+.health-trend-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+/* 设备选择器样式 */
+.device-select-wrap {
+    position: relative;
+    z-index: 10;
+}
+
+.device-expand-btn {
+    padding: 7px 14px;
+    background: #1e1e2e;
+    color: #fff;
+    border: 1px solid #5865f2;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s;
+    margin-right: 30px;
+    margin-top: 15px;
+}
+
+.device-expand-btn:hover {
+    background: #5865f2;
+    transform: scale(1.03);
+}
+
+/* 设备下拉列表 */
+.device-list {
+    position: absolute;
+    top: 38px;
+    right: 0;
+    width: 150px;
+    background: #1e1e2e;
+    border: 1px solid #3c3c5c;
+    border-radius: 6px;
+    padding: 6px 0;
+    display: none;
+    list-style: none;
+    margin-top: 10px;
+}
+
+.device-list.show {
+    display: block;
+    margin-right: 30px;
+}
+
+.device-list li {
+    color: #e0e0e0;
+    font-size: 14px;
+    padding: 7px 14px;
+    cursor: pointer;
+}
+
+.device-list li.active,
+.device-list li:hover {
+    background: #5865f2;
+    color: #fff;
+}
+
+/* ECharts 容器 - 宽度铺满 */
+.echarts-chart {
+    width: 100%;
+    height: 85%;
+    margin: 0 auto;
+}
+
+
+
+.data_box1 .anomaly_trend {
+    width: 30%;
+    background-color: #283b4dec;
+    border-radius: 20px;
+    border: 5px solid #5be6ff;
+    margin-left: 1%;
+}
+
+.anomaly_trend ul {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.anomaly_trend li {
+    width: 94%;
+    height: 65px;
+    display: flex;
+    background-color: #456bb1;
+    margin-top: 12.5px;
+    align-items: center;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    justify-content: space-between;
+}
+
+.anomaly_trend li:hover {
+    background-color: #5284c0;
+    transform: translateY(-5px) scale(1.03);
+}
+
+.anomaly_trend .left {
+    width: 50%;
+    margin-left: 15px;
+}
+
+.anomaly_trend .left h4 {
+    font-size: 22px;
+    color: #fff;
+    margin-bottom: 3px;
+}
+
+.anomaly_trend .left p {
+    font-size: 16px;
+    color: #ececec;
+}
+
+.anomaly_trend .right {
+    width: 40%;
+    color: #ffbdbd;
+    font-size: 26px;
+    text-align: right;
+    margin-right: 20px;
+}
+
+
+/* 模型评估布局 */
+.model_performance {
+    width: 24%;
+    background-color: #283b4dec;
+    border-radius: 20px;
+    border: 5px solid #5be6ff;
+    box-sizing: border-box;
+    margin-left: 1%;
+}
+
+.model-container {
+    display: flex;
+    margin-top: 20px;
+}
+
+.model-left {
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    gap: 20px;
+    list-style: none;
+    margin-top: 20px;
+}
+
+.model-left li {
+    width: 85%;
+    margin: 0 auto;
+    height: 92px;
+    margin-bottom: 20px;
+    background-color: #496aa1;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s;
+}
+
+.model-left li:hover {
+    background-color: #618cd1;
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 5px #000;
+}
+
+.model-left li p {
+    font-size: 20px;
+    color: #d1d1d1;
+    margin: 0;
+}
+
+.model-left li h4 {
+    font-size: 30px;
+    color: #ffffff;
+    margin: 5px 0 0;
+}
+
+
+
+
+.data_box2 {
+    width: 96%;
+    display: flex;
+    height: 500px;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    margin-top: 10px;
+}
+
+.device_comp {
+    width: 55%;
+    height: 95%;
+    background-color: #2f4266d2;
+    box-sizing: border-box;
+    border: 5px solid #5be6ff;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+}
+
+
+/* 选择器展开必须加这个！ */
+#compList {
+    display: none;
+    position: absolute;
+    top: 40px;
+    right: 0;
+    background: #1f2a37;
+    border: 1px solid #5be6ff;
+    border-radius: 8px;
+    width: 160px;
+    z-index: 999;
+    padding: 5px 0;
+}
+
+#compList.show {
+    display: block !important;
+}
+
+#compList li {
+    list-style: none;
+    padding: 8px 15px;
+    color: #fff;
+    cursor: pointer;
+}
+
+#compList li:hover {
+    background: #2b3d51;
+}
+
+#compList li.active {
+    background: #5be6ff;
+    color: #000;
+}
+
+/* 右侧2×2网格面板 */
+#deviceDetailPanel {
+    width: 35%;
+    height: 90%;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    margin-left: 5%;
+    padding: 20px;
+    color: #fff;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 15px rgba(91, 230, 255, 0.2);
+}
+
+.device-list-comparison {
+    display: none !important;
+}
+
+.device-list-comparison.show {
+    display: block !important;
+}
+
+#detailDeviceName {
+    font-size: 22px;
+    text-align: center;
+    margin: 0 0 20px 0;
+    color: #5be6ff;
+}
+
+.detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 15px;
+    flex: 1;
+}
+
+.grid-item {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgba(91, 230, 255, 0.2);
+}
+
+.grid-item .label {
+    font-size: 14px;
+    color: #ccc;
+    margin: 0 0 6px 0;
+}
+
+.grid-item .value {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+    color: #fff;
+}
+
+.grid-item .value span {
+    font-size: 12px;
+    color: #ccc;
+}
+
+/* 雷达图 */
+#deviceRadarChart {
+    border: 1px solid rgba(91, 230, 255, 0.3);
+    border-radius: 10px;
+    background: rgba(40, 59, 77, 0.5);
+}
+
+
+
+.mul_analysis {
+    width: 40%;
+    height: 95%;
+    border-radius: 20px;
+    position: relative;
+    background-color: #2f4266d2;
+    box-sizing: border-box;
+    padding: 0 !important;
+    border: 5px solid #5be6ff;
+    margin-left: 1%;
+}
+
+
+#corrHeatmap {
+    border-radius: 10px;
+    background: rgba(40, 59, 77, 0.5);
+    border: 1px solid rgba(91, 230, 255, 0.3);
+}
+
+/* 适配ECharts热力图图例/坐标轴样式（全局兼容） */
+:root {
+    --echarts-text-color: #fff;
+    --echarts-axis-color: #5be6ff;
+    --echarts-grid-color: rgba(255, 255, 255, 0.1);
+}
+
+.echarts-xaxis text,
+.echarts-yaxis text {
+    fill: var(--echarts-text-color) !important;
+    font-size: 14px !important;
+}
+
+.echarts-xaxis line,
+.echarts-yaxis line {
+    stroke: var(--echarts-grid-color) !important;
+}
+
+.echarts-xaxis axisLine,
+.echarts-yaxis axisLine {
+    stroke: var(--echarts-axis-color) !important;
+}
+
+.echarts-legend text {
+    fill: var(--echarts-text-color) !important;
+    font-size: 12px !important;
+}
+
+
+
+/* ========== 设备列表页面新增样式 ========== */
+.device-table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #e0e0e0;
+    background: rgba(30, 40, 60, 0.5);
+    border-radius: 12px;
+    overflow: hidden;
+    backdrop-filter: blur(2px);
+}
+
+.device-table th,
+.device-table td {
+    padding: 12px 10px;
+    text-align: center;
+    border-bottom: 1px solid rgba(91, 230, 255, 0.2);
+}
+
+.device-table th {
+    background: #1f2a3e;
+    color: #5be6ff;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.device-table tr:hover {
+    background: rgba(91, 230, 255, 0.1);
+}
+
+.status-normal {
+    color: #2ecc71;
+    font-weight: 500;
+}
+
+.status-warning {
+    color: #f39c12;
+    font-weight: 500;
+}
+
+.status-abnormal {
+    color: #e74c3c;
+    font-weight: 500;
+}
+
+/* 下拉菜单容器 */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown button {
+    background: #2563eb;
+    border: none;
+    padding: 5px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    color: white;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background: #2d3748;
+    min-width: 110px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    z-index: 20;
+    overflow: hidden;
+}
+
+.dropdown-content button {
+    background: none;
+    width: 100%;
+    text-align: left;
+    padding: 8px 12px;
+    color: #e2e8f0;
+    border-radius: 0;
+}
+
+.dropdown-content button:hover {
+    background: #4a5568;
+}
+
+.edit-input {
+    background: #1e2a3a;
+    border: 1px solid #3c4b6e;
+    border-radius: 8px;
+    padding: 8px 12px;
+    color: #fff;
+    width: 100%;
+    margin-top: 4px;
+    margin-bottom: 12px;
+}
+
+.edit-input:focus {
+    border-color: #5be6ff;
+    outline: none;
+}
+
+#maintenanceList {
+    background: #0f172a60;
+    border-radius: 12px;
+    padding: 8px;
+}
+
+.maint-item {
+    background: #1e293b;
+    margin-bottom: 8px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    border-left: 3px solid #5be6ff;
+}
+
+.maint-item span {
+    color: #a0c4ff;
+}
+
+.delete-maint {
+    background: none;
+    border: none;
+    color: #f87171;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 8px;
+}
+
+.delete-maint:hover {
+    color: #ff4444;
+}
+
+.device-search-btn,
+.device-reset-btn {
+    padding: 8px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.device-search-btn {
+    background-color: #2563eb;
+    color: white;
+}
+
+.device-reset-btn {
+    background-color: #4b5563;
+    color: white;
+}
+
+
+
+
+
+
+
+
+
+.set {
+    padding-bottom: 100px;
+}
+
+.set .set-ul {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.set .set-box1,
+.set .set-box2 {
+    width: 48%;
+    background: rgba(44, 56, 85, 0.5);
+    padding: 10px 0;
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-left: 20px;
+    padding-bottom: 20px;
+}
+
+
+.set .set-box3 {
+    width: 40%;
+    height: 500px;
+    background: rgba(44, 56, 85, 0.5);
+    padding: 10px 0;
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-left: 20px;
+    padding-bottom: 20px;
+}
+
+.set .set-box4 {
+    width: 56%;
+    height: 500px;
+    background: rgba(44, 56, 85, 0.5);
+    padding: 10px 0;
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-left: 20px;
+    padding-bottom: 20px;
+}
+
+
+.setting-box {
+    margin-left: 20px;
+}
+
+
+.setting-box h2 {
+    font-size: 30px;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+.setting-box li {
+    width: 97%;
+    height: 50px;
+    display: flex;
+    border: 2px solid rgba(204, 204, 204, 0.2);
+    font-size: 20px;
+    align-items: center;
+    padding-left: 20px;
+    margin-bottom: 5px;
+    color: #9c9c9c;
+    transition: background-color 0.2s ease;
+}
+
+.setting-box li:hover {
+    background: rgba(44, 57, 85, 0.5);
+}
+
+
+
+/* 新增：设置页面表单样式 */
+.form-item {
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+}
+
+.form-item label {
+    color: #fff;
+    font-size: 18px;
+    width: 12%;
+}
+
+.form-item input {
+
+    flex: 1;
+    height: 36px;
+    padding: 0 10px;
+    border: 1px solid #465480;
+    border-radius: 4px;
+    background: #242d47;
+    color: #fff;
+    font-size: 16px;
+    outline: none;
+}
+
+.form-item input:focus {
+    border-color: #4096ff;
+}
+
+/* 头像上传区域 */
+.avatar-group {
+    width: 90%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.avatar-preview {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #465480;
+}
+
+#avatarUpload {
+    width: 60%px;
+    color: #ccc;
+    font-size: 14px;
+}
+
+/* 提示文字 */
+.tip {
+    font-size: 12px;
+    color: #999;
+    margin-left: 10px;
+}
+
+/* 保存按钮 */
+.save-btn {
+    width: 97%;
+    height: 44px;
+    background: #4096ff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 18px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background 0.2s;
+}
+
+.save-btn:hover {
+    background: #3088ff;
+}
+
+/* 成功/错误提示 */
+.toast {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px 20px;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 16px;
+    z-index: 1000;
+    display: none;
+}
+
+.toast.success {
+    background: #52c41a;
+}
+
+.toast.error {
+    background: #ff4d4f;
+}
+
+
+
+/* 开关样式 */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: -4px;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 30px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+.round {
+    width: 85px;
+}
+
+input:checked+.slider {
+    background-color: #4096ff;
+}
+
+input:focus+.slider {
+    box-shadow: 0 0 1px #4096ff;
+}
+
+input:checked+.slider:before {
+    transform: translateX(50px);
+}
+
+input[type="radio"] {
+    width: 20px;
+    height: 20px;
+    accent-color: #4096ff;
+}
+
+#checkUpdateBtn {
+    width: 90px;
+    height: 35px;
+    margin-top: 0px;
+    font-size: 15px;
+}
+
+.setting-box .role {
+    display: flex;
+    border: none;
+    height: 100px;
+    padding: 0;
+    margin-top: 20px;
+}
+
+.setting-box .role .sb {
+    width: 80%;
+    color: #ffffff;
+    align-items: center;
+    margin-left: 10px;
+}
+
+.setting-box .role img {
+    width: 64px;
+    height: auto;
+    margin-left: 30px;
+}
+
+.setting-box .role .sb h4 {
+    margin-left: 20px;
+    font-size: 28px;
+    color: #e8fff6;
+}
+
+.setting-box .role .sb p {
+    margin-left: 20px;
+    font-size: 18px;
+    color: #c9c9c9;
+    margin-top: 5px;
+}
+
+.user-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.user-table th,
+.user-table td {
+    border: 1px solid #465480;
+    padding: 12px 15px;
+    text-align: center;
+}
+
+.user-table th {
+    background-color: #242d47;
+    color: #fff;
+    font-size: 18px;
+}
+
+.user-table td {
+    color: #cfcfcf;
+    font-size: 16px;
+}
+
+/* 操作按钮样式 */
+.operate-btn {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 0 5px;
+    font-size: 14px;
+}
+
+.edit-btn {
+    background-color: #4096ff;
+    color: #fff;
+}
+
+.delete-btn {
+    background-color: #ff4d4f;
+    color: #fff;
+}
+
+/* 适配添加用户按钮hover */
+#addUserBtn {
+    transition: background 0.2s;
+}
+
+#addUserBtn:hover {
+    background: #3088ff;
+}
+
+/* 修复弹窗关闭按钮位置 */
+#userModal .modal-close {
+    top: 12px;
+    right: 12px;
+}
+
+/* 表单输入框聚焦样式 */
+#userForm input:focus {
+    border-color: #4096ff;
+}
+
+/* 用户模块容器相对定位 */
+.user-module-wrapper {
+    position: relative;
+}
+
+/* 用户模块内容区域（用于定位遮罩） */
+.user-module-content {
+    position: relative;
+}
+
+/* 权限遮罩层样式 */
+.permission-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(4px);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    cursor: not-allowed;
+}
+
+.permission-overlay::after {
+    content: "您没有权限查看该功能";
+    font-size: 18px;
+    color: #333;
+    font-weight: 500;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 12px 24px;
+    border-radius: 8px;
+    color: #fff;
+    text-align: center;
+    backdrop-filter: blur(2px);
+}
+
+
+
+
+
+
+/* 时间切换按钮样式 */
+.time-btn {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    background: #f0f0f0;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 14px;
+}
+
+.time-btn.active {
+    background: #4096ff;
+    color: #fff;
+}
+
+.time-btn:hover:not(.active) {
+    background: #e0e0e0;
+}
+
+/* 图表异常点样式（ECharts 自定义） */
+.ec-异常点 {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #ff4d4f;
+    border: 2px solid #fff;
+    box-shadow: 0 0 0 1px #ff4d4f;
+}
+
+
+
+/* ========== 响应式布局 ========== */
+@media (max-width: 1366px) {
+    .app-header {
+        padding: 0 16px;
+    }
+
+    .logo h1 {
+        font-size: 24px;
+    }
+
+    .menu-item {
+        width: 120px;
+        font-size: 16px;
+    }
+
+    .current-date {
+        font-size: 14px;
+        margin-right: 15px;
+    }
+
+    .user-info {
+        font-size: 16px;
+    }
+
+    .user-img {
+        width: 45px;
+        height: 45px;
+    }
+
+    .home-box1,
+    .home-box2 {
+        width: 48%;
+    }
+
+    .home-box1 .bg,
+    .home-box2 .bg {
+        height: auto;
+        min-height: 480px;
+    }
+
+    .home-box3 .bg {
+        height: auto;
+        margin-bottom: 50px;
+    }
+
+    .box3 {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .home-box3 .box3-1 {
+        width: 90%;
+        margin-bottom: 20px;
+    }
+
+    .box4-1 {
+        width: 90%;
+        margin-left: 0;
+        height: 400px;
+    }
+
+    .data_box1 {
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .health_trend,
+    .anomaly_trend,
+    .model_performance {
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .data_box2 {
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .device_comp,
+    .mul_analysis {
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+        height: auto;
+        min-height: 500px;
+    }
+
+    .device_comp {
+        margin-bottom: 20px;
+    }
+
+    .device_comp .health-trend-header {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    #deviceDetailPanel {
+        width: 90%;
+        margin: 20px auto;
+    }
+
+    .set .set-box1,
+    .set .set-box2,
+    .set .set-box3,
+    .set .set-box4 {
+        width: 100%;
+        max-width: 600px;
+        margin: 20px auto;
+    }
+
+    .set-ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .setting-box li {
+        flex-wrap: wrap;
+        height: auto;
+        padding: 10px;
+    }
+
+    .form-item {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+    .form-item label {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+
+    .form-item input,
+    .avatar-group {
+        width: 100%;
+    }
+
+    .switch {
+        margin-left: 0;
+    }
+
+    .role {
+        flex-wrap: wrap;
+        text-align: center;
+    }
+
+    .role img {
+        margin: 0 auto;
+    }
+
+    .sb {
+        width: 100%;
+        text-align: center;
+    }
+
+    .sb h4,
+    .sb p {
+        margin: 5px 0;
+    }
+
+    .device-table th,
+    .device-table td {
+        font-size: 12px;
+        padding: 8px 4px;
+    }
+
+    .dropdown button {
+        padding: 4px 8px;
+        font-size: 12px;
+    }
+
+    .dropdown-content button {
+        font-size: 12px;
+        padding: 5px;
+    }
+
+    .modal {
+        width: 90%;
+        max-width: 500px;
+    }
+
+    .pca-header {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .pca-header h3 {
+        font-size: 16px;
+    }
+
+    .pca-device-expand-btn {
+        padding: 5px 10px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .sidebar {
+        width: 80px;
+    }
+
+    .sidebar .logo h1,
+    .sidebar .menu-item span,
+    .sidebar .user-info {
+        display: none;
+    }
+
+    .sidebar .menu-item {
+        justify-content: center;
+        padding: 14px 0;
+    }
+
+    .sidebar .user-img {
+        margin: 0;
+    }
+
+    .homepage-box1 {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .home-box1,
+    .home-box2 {
+        width: 90%;
+        margin: 10px auto;
+    }
+
+    .home-box1 .box1-1 li {
+        width: 100%;
+    }
+
+    .home-box2 .box2 {
+        flex-direction: column;
+    }
+
+    .home-box2 .box2-left,
+    .home-box2 .box2-2 {
+        width: 100%;
+    }
+
+    .home-box2 .box2-2 ul {
+        margin-left: 0;
+    }
+
+    .home-box2 .box2-2 li {
+        width: 100%;
+    }
+
+    .box4-1 {
+        height: 350px;
+    }
+
+    .health_trend1 {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .device-expand-btn {
+        margin-right: 0;
+        margin-top: 5px;
+    }
+
+    .device-list {
+        right: auto;
+        left: 0;
+    }
+
+    .device-list.show {
+        margin-right: 0;
+    }
+
+    .data_box1,
+    .data_box2 {
+        width: 100%;
+        padding: 0 10px;
+    }
+
+    .health_trend,
+    .anomaly_trend,
+    .model_performance {
+        width: 100%;
+    }
+
+    .device_comp,
+    .mul_analysis {
+        width: 100%;
+    }
+
+    .device_comp {
+        flex-direction: column;
+        height: auto;
+    }
+
+    #deviceRadarChart {
+        width: 100%;
+        height: 400px;
+    }
+
+    .device_comp>div:first-child {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #deviceDetailPanel {
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .detail-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .set .set-box1,
+    .set .set-box2,
+    .set .set-box3,
+    .set .set-box4 {
+        width: 95%;
+    }
+
+    .setting-box li {
+        font-size: 16px;
+    }
+
+    .setting-box .role .sb h4 {
+        font-size: 24px;
+    }
+
+    .setting-box .role .sb p {
+        font-size: 16px;
+    }
+
+    .user-table th,
+    .user-table td {
+        font-size: 14px;
+        padding: 8px;
+    }
+}
+
+@media (max-width: 768px) {
+    .app-header {
+        flex-direction: column;
+        height: auto;
+        padding: 10px;
+    }
+
+    .logo {
+        margin-left: 0;
+        margin-bottom: 10px;
+    }
+
+    .main-wrapper {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .menu {
+        justify-content: center;
+    }
+
+    .menu-item {
+        width: 80px;
+        font-size: 12px;
+        padding: 5px 8px;
+    }
+
+    .menu-item img {
+        width: 20px;
+        height: 20px;
+        margin-right: 5px;
+    }
+
+    .current-date {
+        display: none;
+    }
+
+    .user {
+        margin-right: 0;
+        margin-top: 10px;
+    }
+
+    .home-box1,
+    .home-box2 {
+        width: 95%;
+    }
+
+    .home-box1 .box1-1 li .device_img img {
+        width: 40px;
+    }
+
+    .home-box1 .box1-1 li .device_health .name h4 {
+        font-size: 14px;
+    }
+
+    .home-box1 .box1-1 li .device_health .name h2 {
+        font-size: 20px;
+    }
+
+    .home-box1 .box1-1 li .device_health .name p {
+        font-size: 16px;
+    }
+
+    .home-box1 .box1-1 li .device_health .judge-1 h5 {
+        font-size: 12px;
+    }
+
+    .home-box1 .box1-1 li .device_health .judge p {
+        font-size: 12px;
+    }
+
+    .box2-3 p {
+        width: 60%;
+        font-size: 12px;
+    }
+
+    .box2-3 h4 {
+        font-size: 18px;
+    }
+
+    .home-box2 .box2-2 li .anomaly_device h4 {
+        font-size: 16px;
+    }
+
+    .home-box2 .box2-2 li .anomaly_device p {
+        font-size: 12px;
+    }
+
+    .home-box2 .box2-2 li .anomaly_score h3 {
+        font-size: 22px;
+    }
+
+    .home-box3 .box3-1 li p {
+        font-size: 16px;
+    }
+
+    .home-box3 .box3-1 li h4 {
+        font-size: 24px;
+    }
+
+    .box4-1 {
+        height: 300px;
+    }
+
+    .health_trend .echarts-chart {
+        height: 300px;
+    }
+
+    .anomaly_trend li {
+        height: 60px;
+    }
+
+    .anomaly_trend .left h4 {
+        font-size: 18px;
+    }
+
+    .anomaly_trend .left p {
+        font-size: 12px;
+    }
+
+    .anomaly_trend .right {
+        font-size: 20px;
+    }
+
+    .model-left li {
+        height: 80px;
+    }
+
+    .model-left li p {
+        font-size: 14px;
+    }
+
+    .model-left li h4 {
+        font-size: 22px;
+    }
+
+    .device_comp .health-trend-header h3 {
+        font-size: 18px;
+    }
+
+    .mul_analysis .health-trend-header h3 {
+        font-size: 18px;
+    }
+
+    #deviceRadarChart {
+        height: 300px;
+    }
+
+    #corrHeatmap {
+        height: 300px;
+    }
+
+    .setting-box h2 {
+        font-size: 24px;
+    }
+
+    .setting-box li {
+        font-size: 14px;
+    }
+
+    .setting-box .role img {
+        width: 48px;
+    }
+
+    .setting-box .role .sb h4 {
+        font-size: 20px;
+    }
+
+    .setting-box .role .sb p {
+        font-size: 12px;
+    }
+
+    .user-table th,
+    .user-table td {
+        font-size: 12px;
+        padding: 6px;
+    }
+
+    .save-btn {
+        font-size: 14px;
+        height: 38px;
+    }
+
+    .time-btn {
+        padding: 4px 8px;
+        font-size: 12px;
+    }
+}
+
+.box4-1 {
+    min-height: 350px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.pca-chart-container {
+    flex: 1;
+    min-height: 0;
+}
+
+/* 响应式下也保持高度 */
+@media (max-width: 1366px) {
+    .box4-1 {
+        min-height: 300px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .box4-1 {
+        min-height: 280px;
+    }
+}
+
+@media (max-width: 768px) {
+    .box4-1 {
+        min-height: 260px;
+    }
+}
