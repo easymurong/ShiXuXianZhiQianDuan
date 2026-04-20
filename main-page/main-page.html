@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System</title>
+    <link rel="stylesheet" href="./main-page.css">
+</head>
+
+<body>
+    <div class="header">
+        <div class="wrapper">
+            <div class="logo">
+                <img src="../photo/logo.png" alt="">
+                <h3>工业检测</h3>
+            </div>
+            <div class="tips">
+                <span>请先登录后进入系统页面</span>
+            </div>
+            <div class="login">
+                <span>注册</span>
+                <span>登录</span>
+            </div>
+        </div>
+    </div>
+    <div class="modal-mask" id="modalMask"></div>
+    <!-- 登录弹窗 -->
+    <div class="modal login-modal" id="loginModal">
+        <div class="modal-header">
+            <h3>用户登录</h3>
+            <span class="close-btn" id="loginClose">&times;</span>
+        </div>
+        <div class="modal-body">
+            <form id="loginForm">
+                <div class="form-item">
+                    <label for="loginUsername">用户名：</label>
+                    <input type="text" id="loginUsername" placeholder="请输入用户名" required>
+                </div>
+                <div class="form-item">
+                    <label for="loginPwd">密码：</label>
+                    <input type="password" id="loginPwd" placeholder="请输入密码" required>
+                </div>
+                <div class="form-tips" id="loginTips"></div>
+                <button type="submit" class="submit-btn">登录</button>
+            </form>
+        </div>
+    </div>
+    <!-- 注册弹窗 -->
+    <div class="modal register-modal" id="registerModal">
+        <div class="modal-header">
+            <h3>用户注册</h3>
+            <span class="close-btn" id="registerClose">&times;</span>
+        </div>
+        <div class="modal-body">
+            <form id="registerForm">
+                <div class="form-item">
+                    <label for="regUsername">用户名：</label>
+                    <input type="text" id="regUsername" placeholder="请输入用户名" required>
+                </div>
+                <div class="form-item">
+                    <label for="regProfession">职业：</label>
+                    <select id="regProfession" required>
+                        <option value="">请选择职业</option>
+                        <option value="管理员">管理员</option>
+                        <option value="数据分析员">数据分析员</option>
+                        <option value="设备工程师">设备工程师</option>
+                    </select>
+                </div>
+                <div class="form-item">
+                    <label for="regEmail">邮箱：</label>
+                    <input type="email" id="regEmail" placeholder="请输入邮箱" required>
+                </div>
+                <div class="form-item">
+                    <label for="regPwd">密码：</label>
+                    <input type="password" id="regPwd" placeholder="请输入密码" required>
+                </div>
+                <div class="form-tips" id="registerTips"></div>
+                <button type="submit" class="submit-btn">注册</button>
+            </form>
+        </div>
+    </div>
+    <div class="img-header">
+        <img src="../photo/head1.png" alt="">
+        <div class="scroll-hint" id="scrollHint">
+            <span class="arrow-text">向下滑动</span>
+            <div class="arrow-icon">↓</div>
+        </div>
+    </div>
+    <div class="banner">
+        <div class="wrapper">
+            <div class="box1-1">
+                <h2>核心功能</h2>
+                <div class="box1">
+                    <ul>
+                        <li>
+                            <img src="../photo/main-2.png" alt="">
+                            <h3>异常检测</h3>
+                            <p>基于智能算法精准识别设备运行异常，提前预警故障风险</p>
+                        </li>
+                        <li>
+                            <img src="../photo/main-1.png" alt="">
+                            <h3>预测性能</h3>
+                            <p>通过历史数据构建预测模型，科学预判设备未来运行状态</p>
+                        </li>
+                        <li>
+                            <img src="../photo/main-3.png" alt="">
+                            <h3>数据分析</h3>
+                            <p>深度挖掘工业数据价值，为生产决策提供可靠数据支撑</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="box2">
+                <h2>核心技术</h2>
+                <div class="box2-1">
+                    <ul>
+                        <div class="box2-1-1">
+                            <li>
+                                <p>深度学习模型</p>
+                            </li>
+                            <li>
+                                <p>时序数据预测</p>
+                            </li>
+                            <li>
+                                <p>工业数据处理</p>
+                            </li>
+                        </div>
+                        <div class="box2-1-2">
+                            <li>
+                                <p>HTML+CSS+JS 前端</p>
+                            </li>
+                            <li>
+                                <p>Python / 后端服务</p>
+                            </li>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+            <div class="box3">
+                <h2 style="margin-top: 30px;">应用场景</h2>
+                <div class="box3-1">
+                    <ul>
+                        <li>
+                            <img src="../photo/main-4.png" alt="">
+                            <h3>工厂设备监测</h3>
+                        </li>
+                        <li>
+                            <img src="../photo/main-5.png" alt="">
+                            <h3>生产线故障预警</h3>
+                        </li>
+                        <li>
+                            <img src="../photo/main-6.png" alt="">
+                            <h3>工业数据大屏</h3>
+                        </li>
+                        <li>
+                            <img src="../photo/main-7.png" alt="">
+                            <h3>设备维护管理</h3>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tail">
+        <div class="wrapper">
+            <p>时序先知——基于DLTTS扩散模型的工业设备智能监测系统 </p>
+        </div>
+    </div>
+
+    <script src="./main-page.js"></script>
+</body>
+
+</html>
